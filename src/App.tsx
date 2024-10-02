@@ -1,12 +1,13 @@
-import './App.css'
+// import "./App.css";
+import HomePage from "./pages/HomePage";
+// import Counter from './redux/Counter';
 
 function App() {
-
   return (
     <>
-      <h1>Hello bitch</h1>
+      <HomePage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
