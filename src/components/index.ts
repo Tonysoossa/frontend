@@ -1,6 +1,11 @@
-import {Nav} from "./HomePage/NavHomePage/Nav";
-import {Main} from './HomePage/MainHomePage/Main'
-import {Footer} from './HomePage/FooterHomePage/Footer'
+// NOTE NAV & FOOTER
+import {Nav} from "./Nav/Nav";
+import {Footer} from './Footer/Footer'
 
+// NOTE HOMEPAGE NOTE
+import {Main} from './HomePage/Main'
 
-export  {Nav, Main, Footer};
+// NOTE LOGIPAGE NOTE
+import { MainLogIn } from "./LoginPage/Main";
+
+export  {Nav, Main, Footer,MainLogIn};
