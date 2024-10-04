@@ -4,6 +4,7 @@ import iconSecurity from "../../assets/img/icon-security.png";
 import styles from "./Main.module.css";
 
 export function Main() {
+  
   return (
     <main>
       <div className={styles.hero}>
