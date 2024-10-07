@@ -1,4 +1,4 @@
-import { Main } from "../components/index";
+import { Main } from "../containers/index";
 
 function HomePage() {
   return (

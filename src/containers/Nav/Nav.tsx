@@ -7,8 +7,6 @@ export function Nav() {
   const navigate = useNavigate();
   const dispatch = useDispatch(); // Initialisation du dispatch
   const token = sessionStorage.getItem("authToken");
-  // const dispatch = useDispatch();
-  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // Supposons que tu as un slice d'authentification
 
   const handleSignInClick = () => {
     navigate("/login");

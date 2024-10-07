@@ -52,6 +52,10 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload;
+        // NOTE FIX
+        console.log("Token reçu :", action.payload);
+        // NOTE FIX
+
         sessionStorage.setItem("authToken", action.payload);
       })
       .addCase(loginUser.rejected, (state, action) => {

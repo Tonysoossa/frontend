@@ -1,4 +1,4 @@
-import { MainLogIn } from "../components/index";
+import { MainLogIn } from "../containers/index";
 
 function LoginPage() {
   return (
