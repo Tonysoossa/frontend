@@ -32,7 +32,7 @@ export const loginUser = createAsyncThunk<
   }
 
   const data = await response.json();
-  return data.token; 
+  return data.body.token; 
 });
 
 const authSlice = createSlice({
