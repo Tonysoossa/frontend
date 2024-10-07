@@ -1,11 +1,14 @@
-import styles from "./Main.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/authSlice";
 import { RootState, AppDispatch } from "../../redux/store";
+import styles from "./Main.module.css";
 
 export function MainLogIn() {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { loading, error, token } = useSelector(
     (state: RootState) => state.auth
   );
@@ -18,16 +21,19 @@ export function MainLogIn() {
     dispatch(loginUser({ email, password }));
   };
 
+  // Utilisation de useEffect pour surveiller le token et naviguer une fois qu'il est disponible
+  useEffect(() => {
+    if (token) {
+      navigate("/"); // Redirige vers la page d'accueil après la connexion
+    }
+  }, [token, navigate]); // Dépendance sur 'token' et 'navigate'
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
     return <div>Error: {error}</div>;
-  }
-
-  if (token) {
-    return <div>Connected with token: {token}</div>;
   }
 
   return (

@@ -2,7 +2,6 @@ const API_ENDPOINT = "http://localhost:3001/api/v1";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
 interface AuthState {
   token: string | null;
   loading: boolean;
@@ -10,13 +9,13 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: null,
+  token: sessionStorage.getItem("authToken"), // Retrieve token if present
   loading: false,
   error: null,
 };
 
 export const loginUser = createAsyncThunk<
-  string, 
+  string,
   { email: string; password: string }
 >("auth/loginUser", async ({ email, password }) => {
   const response = await fetch(`${API_ENDPOINT}/user/login`, {
@@ -32,7 +31,7 @@ export const loginUser = createAsyncThunk<
   }
 
   const data = await response.json();
-  return data.body.token; 
+  return data.body.token;
 });
 
 const authSlice = createSlice({
@@ -41,6 +40,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.token = null;
+      sessionStorage.removeItem("authToken"); // Clear the token
     },
   },
   extraReducers: (builder) => {
@@ -51,7 +51,8 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.token = action.payload; 
+        state.token = action.payload;
+        sessionStorage.setItem("authToken", action.payload);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
