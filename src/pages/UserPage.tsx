@@ -1,7 +1,9 @@
+import { MainUser } from "../containers/index";
+
 function UserPage() {
   return (
     <>
-      <p>Here is the user page</p>
+      <MainUser />
     </>
   );
 }

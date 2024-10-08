@@ -1,13 +1,13 @@
 .main {
   flex: 1;
-  margin-top: -50px;  /* FIX NEED ? FIX */
+  padding: 1rem 0 1rem 0;
 }
 
 .bgDark {
   background-color: #12002b;
 }
 
-.sr-only {
+.srOnly {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
   -webkit-clip-path: inset(50%) !important;
@@ -19,67 +19,6 @@
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
-}
-
-.signInButton {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-}
-
-.signInContent {
-  box-sizing: border-box;
-  background-color: white;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 3rem;
-  padding: 2rem;
-}
-
-.signInIcon {
-  font-size: 5rem !important;
-}
-
-.inputRemember {
-  display: flex;
-}
-
-.inputRemember label {
-  margin-left: 0.25rem;
-}
-
-.inputWrapper {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 1rem;
-}
-
-.inputWrapper label {
-  font-weight: bold;
-}
-
-.inputWrapper input {
-  padding: 5px;
-  font-size: 1.2rem;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  border-top: 2px solid #ccc;
-  padding: 2rem 0 1.5rem;
-}
-
-.footer-text {
-  margin: 0;
-  padding: 0;
 }
 
 .account {
@@ -97,29 +36,37 @@
   margin-bottom: 2rem;
 }
 
-.account-amount {
+.accountAmount {
   margin: 0;
   font-size: 2.5rem;
   font-weight: bold;
 }
 
-.account-amount-description {
+.accountAmountDescription {
   margin: 0;
 }
 
-.account-title {
+/* .account-title {
   margin: 0;
   padding: 0;
   font-size: 1rem;
   font-weight: normal;
-}
+} */
 
-.account-content-wrapper {
+.accountContentWrapper {
   width: 100%;
   flex: 1;
 }
 
-.edit-button {
+.accountContentWrapper p {
+  margin: -5px;
+}
+
+h3 {
+  margin: 0px;
+}
+
+.editButton {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
@@ -132,7 +79,7 @@
   margin-bottom: 2rem;
 }
 
-.transaction-button {
+.transactionBtn {
   display: block;
   width: 100%;
   padding: 8px;
@@ -149,11 +96,11 @@
     flex-direction: row;
   }
 
-  .account-content-wrapper.cta {
+  .accountContentWrapper.cta {
     flex: 0;
   }
 
-  .transaction-button {
+  .transactionBtn {
     width: 200px;
   }
 }
