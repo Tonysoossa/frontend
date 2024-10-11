@@ -16,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
-  cursor: pointer;
+  padding: 0 40px 15px 40px;
 }
 
 .mainNav button {
   font-weight: bold;
   color: #2c3e50;
+  cursor: pointer;
 }
 
 .mainNav button.router-link-exact-active {
@@ -35,7 +35,6 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .mainNavItem p:hover {
@@ -45,6 +44,8 @@
 .mainNavLogo {
   display: flex;
   align-items: center;
+  cursor: pointer;
+
 }
 
 .image {

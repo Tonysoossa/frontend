@@ -14,11 +14,12 @@ function App() {
   return (
     <Router>
       <Nav />
+      <div className="general">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/user"
+          path="/profile"
           element={
             <PrivateRoute>
               <UserPage />
@@ -27,6 +28,7 @@ function App() {
         />
       </Routes>
       <Footer />
+      </div>
     </Router>
   );
 }

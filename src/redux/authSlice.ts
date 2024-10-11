@@ -54,6 +54,7 @@ const authSlice = createSlice({
         state.token = action.payload;
         // NOTE FIX
         console.log("Token reçu :", action.payload);
+        console.log(`${API_ENDPOINT}/user/profile.userName`);
         // NOTE FIX
 
         sessionStorage.setItem("authToken", action.payload);

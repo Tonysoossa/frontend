@@ -24,9 +24,10 @@ export function MainLogIn() {
   // Utilisation de useEffect pour surveiller le token et naviguer une fois qu'il est disponible
   useEffect(() => {
     if (token) {
-      navigate("/user"); // Redirige vers la page d'accueil après la connexion
+      navigate("/profile"); 
+
     }
-  }, [token, navigate]); // Dépendance sur 'token' et 'navigate'
+  }, [token, navigate]); 
 
   if (loading) {
     return <div>Loading...</div>;

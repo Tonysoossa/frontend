@@ -12,9 +12,7 @@ export function Nav() {
     navigate("/login");
   };
 
-  const handleLogoClick = () => {
-    navigate("/");
-  };
+  const handleLogoClick = () => navigate("/");
 
   const handleLogoutClick = () => {
     dispatch(logout()); // Déconnexion en utilisant Redux
