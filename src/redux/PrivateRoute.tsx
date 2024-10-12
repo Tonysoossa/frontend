@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Prompt from "../components/Prompt/PromptToken";
-import { RootState } from "../redux/store";
+import { RootState, AppDispatch } from "../redux/store";
+import { setShowPrompt } from "../redux/promptSlice";
 
 interface PrivateRouteProps {
   children: JSX.Element;
@@ -10,18 +11,19 @@ interface PrivateRouteProps {
 
 export function PrivateRoute({ children }: PrivateRouteProps) {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { token } = useSelector((state: RootState) => state.auth);
-  const [showPrompt, setShowPrompt] = useState(false); // État pour gérer l'affichage de la prompt
+  const showPrompt = useSelector((state: RootState) => state.prompt.showPrompt);
 
   useEffect(() => {
-    // Rediriger si pas de token
+    // Afficher la prompt si pas de token
     if (!token) {
-      setShowPrompt(true);
+      dispatch(setShowPrompt(true));
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   const handleClosePrompt = () => {
-    setShowPrompt(false);
+    dispatch(setShowPrompt(false));
     navigate("/login");
   };
 
