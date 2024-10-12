@@ -1,12 +1,13 @@
 import styles from "./Nav.module.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"; //
+import { useSelector, useDispatch } from "react-redux"; //
 import { logout } from "../../redux/authSlice";
+import { RootState } from "../../redux/store";
 
 export function Nav() {
   const navigate = useNavigate();
   const dispatch = useDispatch(); // Initialisation du dispatch
-  const token = sessionStorage.getItem("authToken");
+  const { token } = useSelector((state: RootState) => state.auth);
 
   const handleSignInClick = () => {
     navigate("/login");
@@ -16,7 +17,7 @@ export function Nav() {
 
   const handleLogoutClick = () => {
     dispatch(logout()); // Déconnexion en utilisant Redux
-    sessionStorage.removeItem("authToken"); // Supprimer le token de sessionStorage
+    sessionStorage.removeItem("authToken");
     navigate("/"); // Rediriger vers la page d'accueil après la déconnexion
   };
 

@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Prompt from "../components/Prompt/PromptToken";
+import { RootState } from "../redux/store";
 
 interface PrivateRouteProps {
   children: JSX.Element;
@@ -8,7 +10,7 @@ interface PrivateRouteProps {
 
 export function PrivateRoute({ children }: PrivateRouteProps) {
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("authToken");
+  const { token } = useSelector((state: RootState) => state.auth);
   const [showPrompt, setShowPrompt] = useState(false); // État pour gérer l'affichage de la prompt
 
   useEffect(() => {
