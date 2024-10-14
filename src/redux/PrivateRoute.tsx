@@ -20,11 +20,10 @@ export function PrivateRoute({ children }: PrivateRouteProps) {
     if (!token) {
       dispatch(setShowPrompt(true));
     }
-  }, [token, dispatch]);
+  }, [token, dispatch, navigate]);
 
   const handleClosePrompt = () => {
     dispatch(setShowPrompt(false));
-    navigate("/login");
   };
 
   return (
