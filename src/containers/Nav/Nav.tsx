@@ -23,18 +23,15 @@ export function Nav() {
 
   const handleLogoClick = () => navigate("/");
   const handleLogoutClick = () => {
-    dispatch(logout()); // Déconnexion en utilisant Redux
+    dispatch(logout());
     sessionStorage.removeItem("authToken");
-    navigate("/"); // Rediriger vers la page d'accueil après la déconnexion
+    navigate("/");
   };
 
   return (
     <nav className={styles.mainNav}>
       <a role="button" className={styles.mainNavLogo} onClick={handleLogoClick}>
-        {token ? (
-          <FontAwesomeIcon icon={faVault} className={styles.faVault} />
-        ) : null}
-
+        {token && <FontAwesomeIcon icon={faVault} className={styles.faVault} />}
         <img
           className={styles.image}
           src="/argentBankLogo.png"
@@ -55,7 +52,6 @@ export function Nav() {
             <a role="button" onClick={handleUserIconClick}>
               <i className={`fa fa-user-circle ${styles.loggedUserIcon}`}></i>
             </a>
-
             <a role="button">
               <FontAwesomeIcon icon={faGear} className={styles.gearBtn} />
             </a>

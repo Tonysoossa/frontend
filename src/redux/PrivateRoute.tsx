@@ -28,7 +28,7 @@ export function PrivateRoute({ children }: PrivateRouteProps) {
 
   return (
     <>
-      {token ? children : null}
+      {token && children}
       {showPrompt && (
         <Prompt
           message="Vous n'êtes pas connecté. Merci de vous connecter pour accéder à ces fonctions."

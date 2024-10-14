@@ -13,6 +13,7 @@ export function MainLogIn() {
     (state: RootState) => state.auth
   );
 
+  // NOTE Pour des raison de sécurité, évite d'exposer les donnée sensible dans le store, ici on gère localement avec useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -52,6 +53,7 @@ export function MainLogIn() {
               required
             />
           </div>
+
           <div className={styles.inputWrapper}>
             <label htmlFor="password">Password</label>
             <input
@@ -62,10 +64,12 @@ export function MainLogIn() {
               required
             />
           </div>
+
           <div className={styles.inputRemember}>
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
+
           <button className={styles.signInButton} type="submit" name="Login">
             Sign In
           </button>

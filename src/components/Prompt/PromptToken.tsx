@@ -10,7 +10,7 @@ const Prompt: React.FC<PromptProps> = ({ message, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, 7000);
 
-    return () => clearTimeout(timer); // Nettoyage du timer
+    return () => clearTimeout(timer);
   }, [onClose]);
 
   const handleOutsideClick = (e: React.MouseEvent) => {

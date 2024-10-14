@@ -70,6 +70,13 @@
   font-size: 1.2rem;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  width: 8rem;
+}
+
 .footer {
   display: flex;
   justify-content: center;

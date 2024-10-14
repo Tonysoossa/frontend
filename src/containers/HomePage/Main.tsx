@@ -1,6 +1,6 @@
-import iconChat from "../../assets/img/icon-chat.png";
-import iconMoney from "../../assets/img/icon-money.png";
-import iconSecurity from "../../assets/img/icon-security.png";
+import iconChat from "../../assets/img/icon-chat.webp";
+import iconMoney from "../../assets/img/icon-money.webp";
+import iconSecurity from "../../assets/img/icon-security.webp";
 import styles from "./Main.module.css";
 import { Features } from "../../components/HomePage/Features";
 
