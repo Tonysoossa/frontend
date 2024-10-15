@@ -4,18 +4,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/authSlice";
 import { RootState, AppDispatch } from "../../redux/store";
 import styles from "./Main.module.css";
+import { useRef } from "react";
 
 export function MainLogIn() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, error, token } = useSelector(
+  const { error, token, vibrate } = useSelector(
     (state: RootState) => state.auth
   );
 
   // NOTE Pour des raison de sécurité, évite d'exposer les donnée sensible dans le store, ici on gère localement avec useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleVibrate = (inputRef: React.RefObject<HTMLInputElement>) => {
+    const failedRequestVibration = inputRef.current;
+
+    // Vérifie si l'input existe avant d'appliquer l'animation
+    if (failedRequestVibration) {
+      failedRequestVibration.classList.add(styles.vibrate);
+      const timeoutId = setTimeout(() => {
+        failedRequestVibration.classList.remove(styles.vibrate);
+      }, 500); // Durée de l'animation
+
+      return () => clearTimeout(timeoutId);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,12 +47,12 @@ export function MainLogIn() {
     }
   });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  useEffect(() => {
+    if (error && vibrate) {
+      handleVibrate(emailRef);
+      handleVibrate(passwordRef);
+    }
+  }, [error, vibrate]);
 
   return (
     <main className={`${styles.main} ${styles.bgDark}`}>
@@ -51,8 +69,10 @@ export function MainLogIn() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className={vibrate ? styles.vibrate : ""}
             />
           </div>
+          {error && <div className={styles.error}>User not recognised</div>}
 
           <div className={styles.inputWrapper}>
             <label htmlFor="password">Password</label>
@@ -62,8 +82,13 @@ export function MainLogIn() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className={vibrate ? styles.vibrate : ""}
             />
           </div>
+
+          {error && !error.includes("email") && (
+            <div className={styles.error}>Password rejected</div>
+          )}
 
           <div className={styles.inputRemember}>
             <input type="checkbox" id="remember-me" />

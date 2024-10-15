@@ -25,9 +25,10 @@ export function EditForm({ userName, firstName, lastName }: editFormProps) {
     // Vérifie si l'input existe avant d'appliquer l'animation
     if (failedRequestvibration) {
       failedRequestvibration.classList.add(styles.vibrate);
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         failedRequestvibration.classList.remove(styles.vibrate);
-      }, 500); // Durée de l'animation
+      }, 500);
+      return () => clearTimeout(timeout); // Durée de l'animation
     }
   };
 

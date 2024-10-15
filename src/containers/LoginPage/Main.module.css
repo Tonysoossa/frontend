@@ -1,6 +1,6 @@
 .main {
   flex: 1;
-  margin-top: -50px;  /* FIX NEED ? FIX */
+  margin-top: -50px; /* FIX NEED ? FIX */
 }
 
 .bgDark {
@@ -163,4 +163,34 @@
   .transaction-button {
     width: 200px;
   }
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.vibrate {
+  animation: vibrate 0.5s ease-in-out;
+}
+
+.error {
+  display: flex;
+  position: relative;
+  top: -8px;
+  color: red;
+  font-size: 0.9em;
 }

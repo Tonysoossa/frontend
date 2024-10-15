@@ -5,7 +5,7 @@ import { RootState } from "./store";
 
 interface AuthState {
   token: string | null;
-  loading: boolean;
+  vibrate: boolean;
   error: string | null;
   email: string | null;
   firstName: string | null;
@@ -15,19 +15,19 @@ interface AuthState {
 
 const initialState: AuthState = {
   token: sessionStorage.getItem("authToken"),
-  loading: false,
   error: null,
   email: null,
   firstName: null,
   lastName: null,
   userName: null,
+  vibrate: false,
 };
 
 // Thunk pour le login
 export const loginUser = createAsyncThunk<
   string,
   { email: string; password: string }
->("auth/loginUser", async ({ email, password }) => {
+>("auth/loginUser", async ({ email, password }, { rejectWithValue }) => {
   const response = await fetch(`${API_ENDPOINT}/user/login`, {
     method: "POST",
     headers: {
@@ -37,9 +37,8 @@ export const loginUser = createAsyncThunk<
   });
 
   if (!response.ok) {
-    
-    throw new Error("Failed to login");
-    console.log("Failed login");
+    const errorData = await response.json();
+    return rejectWithValue(errorData.message || "Failed to login");
   }
 
   const data = await response.json();
@@ -84,22 +83,23 @@ const authSlice = createSlice({
       state.lastName = null;
       state.userName = null;
       sessionStorage.removeItem("authToken");
+      state.vibrate = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.loading = true;
         state.error = null;
+        state.vibrate = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
         state.token = action.payload;
         sessionStorage.setItem("authToken", action.payload);
+        state.vibrate = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.error.message || "Login failed";
+        state.vibrate = true;
       })
       // Pour gérer les infos du profil utilisateur, on ne peut pas reassigner state directement alors on utilise Object.assign pour mettre a jours plusieur champs
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
