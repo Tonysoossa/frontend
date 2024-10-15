@@ -4,7 +4,6 @@ import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import { Nav } from "./containers/Nav/Nav";
 import { Footer } from "./containers";
-import { PrivateRoute } from "./redux/PrivateRoute";
 
 function App() {
   return (
@@ -14,14 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <UserPage />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/profile" element={<UserPage />} />
         </Routes>
         <Footer />
       </div>
