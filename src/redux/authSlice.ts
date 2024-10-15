@@ -1,5 +1,4 @@
 const API_ENDPOINT = "http://localhost:3001/api/v1";
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
@@ -23,7 +22,7 @@ const initialState: AuthState = {
   vibrate: false,
 };
 
-// Thunk pour le login
+// NOTE Thunk pour le login
 export const loginUser = createAsyncThunk<
   string,
   { email: string; password: string }
@@ -45,7 +44,7 @@ export const loginUser = createAsyncThunk<
   return data.body.token;
 });
 
-// Thunk pour récupérer toutes les infos du profil utilisateur
+// NOTE Thunk pour récupérer toutes les infos du profil utilisateur
 export const fetchUserProfile = createAsyncThunk<
   { email: string; firstName: string; lastName: string; userName: string },
   void,
@@ -72,6 +71,38 @@ export const fetchUserProfile = createAsyncThunk<
   return data.body;
 });
 
+// NOTE Thunk pour mettre à jour le profil utilisateur
+export const updateUserName = createAsyncThunk<
+  { userName: string }, // NOTE Données recu en reponse de l'api
+  { userName: string }, // NOTE Arguments envoyé a l'api
+  { state: RootState } // NOTE Type du state
+>(
+  "auth/updateUserName",
+  async ({ userName }, { getState, rejectWithValue }) => {
+    const state = getState();
+    const token = state.auth.token;
+
+    if (!token) return rejectWithValue("No token available");
+
+    const response = await fetch(`${API_ENDPOINT}/user/profile`, {
+      method: "PUT", // NOTE Utilisation de PUT ou PATCH selon ton API
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userName }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return rejectWithValue(errorData.message || "Failed to update userName");
+    }
+
+    const data = await response.json();
+    return data.body; // NOTE Retourne les données mises à jour
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -84,9 +115,18 @@ const authSlice = createSlice({
       state.userName = null;
       sessionStorage.removeItem("authToken");
     },
+    resetVibrate: (state) => {
+      state.vibrate = false;
+    },
+    resetError: (state) => {  // <-- AJOUTER CETTE ACTION
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
+
+      // NOTENOTENOTENOTE LOGINUSER NOTENOTENOTENOTENOTE
+
       .addCase(loginUser.pending, (state) => {
         state.error = null;
         state.vibrate = false;
@@ -100,13 +140,27 @@ const authSlice = createSlice({
         state.error = action.error.message || "Login failed";
         state.vibrate = true;
       })
-      // Pour gérer les infos du profil utilisateur, on ne peut pas reassigner state directement alors on utilise Object.assign pour mettre a jours plusieur champs
+
+      // NOTENOTENOTENOTE FETCHUSERPROFILE NOTENOTENOTENOTENOTE
+
+      // NOTE Pour gérer les infos du profil utilisateur, on ne peut pas reassigner state directement alors on utilise Object.assign pour mettre a jours plusieur champs
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         Object.assign(state, action.payload); // Mise à jour des propriétés
         console.log(action.payload);
+      })
+
+      // NOTENOTENOTENOTE UPDATEUSERNAME NOTENOTENOTENOTENOTE
+
+      // NOTE Gestion de la mise à jour du userName
+      .addCase(updateUserName.fulfilled, (state, action) => {
+        state.userName = action.payload.userName; // NOTE Mise à jour du userName dans le state
+      })
+      .addCase(updateUserName.rejected, (state, action) => {
+        state.error = action.payload as string; // NOTE Gère l'erreur si la mise à jour échoue
+        console.error("Failed to update username:", action.payload);
       });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, resetVibrate, resetError } = authSlice.actions;
 export const authReducer = authSlice.reducer;

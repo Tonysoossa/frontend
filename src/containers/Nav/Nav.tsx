@@ -22,6 +22,7 @@ export function Nav() {
   };
 
   const handleLogoClick = () => navigate("/");
+
   const handleLogoutClick = () => {
     dispatch(logout());
     sessionStorage.removeItem("authToken");

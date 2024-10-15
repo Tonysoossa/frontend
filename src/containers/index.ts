@@ -11,5 +11,8 @@ import { MainLogIn } from "./LoginPage/Main";
 // NOTE USERPAGE NOTE
 import { MainUser } from "./UserPage/Main";
 
+// NOTE UnAuth NOTE
+import { ErrorRedirect } from "./Error404/ErrorRedirect";
 
-export { Nav, Main, Footer, MainLogIn, MainUser };
+
+export { Nav, Main, Footer, MainLogIn, MainUser,ErrorRedirect };

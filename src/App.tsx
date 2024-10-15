@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import { Nav } from "./containers/Nav/Nav";
 import { Footer } from "./containers";
+import UnAuth from "./pages/Error404";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/error404" element={<UnAuth />} />
           <Route path="/profile" element={<UserPage />} />
         </Routes>
         <Footer />

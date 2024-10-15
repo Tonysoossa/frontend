@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../redux/authSlice";
+import { loginUser, resetError, resetVibrate } from "../../redux/authSlice";
 import { RootState, AppDispatch } from "../../redux/store";
 import styles from "./Main.module.css";
 
 export function MainLogIn() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { error, token, vibrate } = useSelector(
     (state: RootState) => state.auth
   );
-  // NOTE Pour des raison de sécurité, évite d'exposer les donnée sensible dans le store, ici on gère localement avec useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [localError, setLocalError] = useState("");
 
-  // NOTE BTN HANDLERS : NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  NOTE
+  // NOTENOTENOTENOTE BTN HANDLERS NOTENOTENOTENOTENOTENOTENOTE
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,16 +28,26 @@ export function MainLogIn() {
     value: string
   ) => {
     setter(value);
-    setLocalError(""); // Efface l'erreur locale si nouvelle saisie 
+    setLocalError(""); // Efface l'erreur locale si nouvelle saisie
   };
 
-  // NOTE useEffect HANDLERS : NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  NOTE
+  // NOTENOTENOTENOTE useEffect HANDLERS : NOTENOTENOTENOTENOTE
 
+  // NOTE Reset vibrate et text quand on navigue vers une autre page
+  useEffect(() => {
+    dispatch(resetVibrate());  
+    return () => {
+      dispatch(resetError());  
+    };
+  }, [location.pathname, dispatch]);
+  
+
+  // NOTE Gestion de la redirection si connexion réussie
   useEffect(() => {
     if (token) {
       navigate("/profile");
     }
-  });
+  }, [token, navigate]);
 
   useEffect(() => {
     if (error) {

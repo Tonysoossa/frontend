@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../redux/authSlice";
 import { RootState, AppDispatch } from "../../redux/store";
 import styles from "./MainUser.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function MainUser() {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const { token, firstName, lastName, userName } = useSelector(
     (state: RootState) => state.auth
   );
@@ -18,7 +19,7 @@ export function MainUser() {
     (state: RootState) => state.editButton.editFormVisible
   );
 
-  // NOTE useEffect HANDLERS : NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  NOTE
+  // NOTE useEffect HANDLERS  NOTENOTENOTENOTENOTENOTENOTENOTENOTE
 
   // Utilisation de useEffect pour surveiller le token et naviguer une fois qu'il est disponible
   useEffect(() => {
@@ -39,15 +40,16 @@ export function MainUser() {
     // Si le token est absent, ferme le formulaire
     if (!token) {
       dispatch(closeForm());
+      navigate("/error404");
     }
-  }, [token, dispatch]);
+  }, [token, dispatch, navigate]);
 
   // Utilisation de useEffect pour fermer le formulaire sur les changements de page
   useEffect(() => {
     dispatch(closeForm());
   }, [location.pathname, dispatch]);
 
-  // NOTE BTN HANDLERS : NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NOTE
+  // NOTE BTN HANDLERS NOTENOTENOTENOTENOTENOTENOTENOTENOTENOTE
 
   const handleEditBtn = () => {
     dispatch(openForm());

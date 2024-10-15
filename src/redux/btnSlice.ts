@@ -30,5 +30,4 @@ const editButtonSlice = createSlice({
 });
 
 export const { toggleForm, closeForm, openForm } = editButtonSlice.actions;
-
 export const editButtonReducer = editButtonSlice.reducer;

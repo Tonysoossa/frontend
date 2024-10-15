@@ -15,7 +15,6 @@
 .mainNav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 0 40px 15px 40px;
   max-width: 1280px;
   margin: 0 auto;
@@ -32,11 +31,11 @@
 }
 
 .mainNavItem {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
 }
 
 .mainNavItem p {
@@ -50,9 +49,12 @@
 }
 
 .mainNavItemLoggedIn {
+  position: relative;
+  top: 1.1rem;
   margin-right: 0.5rem;
   display: flex;
   gap: 1.6rem;
+  margin-right: 1rem;
 }
 
 .userLoggedInText {
@@ -69,7 +71,6 @@
 .mainNavItemLoggedIn a {
   color: #00bc77;
   cursor: pointer;
-
 }
 
 .mainNavItemLoggedIn p:hover {
@@ -89,7 +90,9 @@
 
 .userIcon {
   font-size: 1.8rem !important;
-  color: black;
+  color: #2c3e50;
+  position: relative;
+  top: 3px;
 }
 
 .loggedUserIcon {

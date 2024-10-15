@@ -1,0 +1,32 @@
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  height: 76vh;
+}
+
+.errorPageText {
+  margin: 0 auto;
+  max-width: 40rem;
+  font-size: 22px;
+  padding-top: 1rem ;
+  padding-bottom: 2rem;
+}
+
+.redirectItems {
+  display: flex;
+  margin: 0 auto;
+  width: 20rem;
+  gap: 2rem;
+}
+
+.redirectBtn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  cursor: pointer;
+}
