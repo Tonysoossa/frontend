@@ -190,6 +190,7 @@
 .error {
   display: flex;
   position: relative;
+  margin: 0 auto;
   top: -8px;
   color: red;
   font-size: 0.9em;

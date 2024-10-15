@@ -83,7 +83,6 @@ const authSlice = createSlice({
       state.lastName = null;
       state.userName = null;
       sessionStorage.removeItem("authToken");
-      state.vibrate = false;
     },
   },
   extraReducers: (builder) => {
