@@ -8,15 +8,15 @@ import styles from "./Main.module.css";
 export function MainLogIn() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-
   const { error, token, vibrate } = useSelector(
     (state: RootState) => state.auth
   );
-
   // NOTE Pour des raison de sécurité, évite d'exposer les donnée sensible dans le store, ici on gère localement avec useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [localError, setLocalError] = useState("");
+
+  // NOTE BTN HANDLERS : NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  NOTE
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +30,8 @@ export function MainLogIn() {
     setter(value);
     setLocalError(""); // Efface l'erreur locale si nouvelle saisie 
   };
+
+  // NOTE useEffect HANDLERS : NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  NOTE
 
   useEffect(() => {
     if (token) {
@@ -58,7 +60,7 @@ export function MainLogIn() {
               value={email}
               onChange={(e) => handleInputChange(setEmail, e.target.value)}
               required
-              className={vibrate ? styles.vibrate : ""}
+              className={vibrate ? styles.vibration : ""}
             />
           </div>
           <div className={styles.inputWrapper}>
@@ -69,7 +71,7 @@ export function MainLogIn() {
               value={password}
               onChange={(e) => handleInputChange(setPassword, e.target.value)}
               required
-              className={vibrate ? styles.vibrate : ""}
+              className={vibrate ? styles.vibration : ""}
             />
           </div>
           {localError && (

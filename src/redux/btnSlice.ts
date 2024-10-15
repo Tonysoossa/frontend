@@ -21,7 +21,7 @@ const editButtonSlice = createSlice({
       state.editFormVisible = true; // Inverse la visibilité du formulaire
     },
     closeForm: (state) => {
-      state.cancelFormBtn = false; // Ferme le formulaire
+      state.editFormVisible = false; // Ferme le formulaire
     },
     openForm: (state) => {
       state.editFormVisible = true; // Ouvre le formulaire

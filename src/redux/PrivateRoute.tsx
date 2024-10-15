@@ -19,6 +19,7 @@ export function PrivateRoute({ children }: PrivateRouteProps) {
     // Afficher la prompt si pas de token
     if (!token) {
       dispatch(setShowPrompt(true));
+      navigate("/login");
     }
   }, [token, dispatch, navigate]);
 
