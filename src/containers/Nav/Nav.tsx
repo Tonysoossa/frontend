@@ -35,7 +35,7 @@ export function Nav() {
         {token && <FontAwesomeIcon icon={faVault} className={styles.faVault} />}
         <img
           className={styles.image}
-          src="/argentBankLogo.png"
+          src="/argentBankLogo.webp"
           alt="Argent Bank Logo"
         />
         <h1 className={styles.srOnly}>Argent Bank</h1>
