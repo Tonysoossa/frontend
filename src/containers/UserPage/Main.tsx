@@ -25,7 +25,6 @@ export function MainUser() {
   useEffect(() => {
     const fetchProfile = async () => {
       if (!token) return;
-      // Vérifie si le token est présent avant d'appeler fetchUserProfile au lieu de lancer fetch et attendre le token
       try {
         await dispatch(fetchUserProfile()).unwrap(); // Utilise unwrap pour gérer les erreurs
       } catch (err) {
@@ -33,11 +32,10 @@ export function MainUser() {
       }
     };
 
-    fetchProfile(); // Appelle la fonction pour récupérer le profil si token est présent
-  }, [token, dispatch]); // Ajoute dispatch aux dépendances
+    fetchProfile();
+  }, [token, dispatch]);
 
   useEffect(() => {
-    // Si le token est absent, ferme le formulaire
     if (!token) {
       dispatch(closeForm());
       navigate("/error404");

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 interface EditState {
   editFormVisible: boolean;
   cancelFormBtn: boolean;

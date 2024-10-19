@@ -33,7 +33,6 @@ export function MainLogIn() {
 
   // NOTENOTENOTENOTE useEffect HANDLERS : NOTENOTENOTENOTENOTE
 
-  // NOTE Reset vibrate et text quand on navigue vers une autre page
   useEffect(() => {
     dispatch(resetVibrate());  
     return () => {

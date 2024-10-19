@@ -22,7 +22,6 @@ const initialState: AuthState = {
   vibrate: false,
 };
 
-// NOTE Thunk pour le login
 export const loginUser = createAsyncThunk<
   string,
   { email: string; password: string }
@@ -44,7 +43,6 @@ export const loginUser = createAsyncThunk<
   return data.body.token;
 });
 
-// NOTE Thunk pour récupérer toutes les infos du profil utilisateur
 export const fetchUserProfile = createAsyncThunk<
   { email: string; firstName: string; lastName: string; userName: string },
   void,
@@ -71,7 +69,6 @@ export const fetchUserProfile = createAsyncThunk<
   return data.body;
 });
 
-// NOTE Thunk pour mettre à jour le profil utilisateur
 export const updateUserName = createAsyncThunk<
   { userName: string }, // NOTE Données recu en reponse de l'api
   { userName: string }, // NOTE Arguments envoyé a l'api
@@ -85,7 +82,7 @@ export const updateUserName = createAsyncThunk<
     if (!token) return rejectWithValue("No token available");
 
     const response = await fetch(`${API_ENDPOINT}/user/profile`, {
-      method: "PUT", // NOTE Utilisation de PUT ou PATCH selon ton API
+      method: "PUT", // NOTE Utilisation de PUT
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -118,7 +115,7 @@ const authSlice = createSlice({
     resetVibrate: (state) => {
       state.vibrate = false;
     },
-    resetError: (state) => {  // <-- AJOUTER CETTE ACTION
+    resetError: (state) => {
       state.error = null;
     },
   },
